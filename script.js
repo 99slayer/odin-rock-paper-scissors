@@ -15,38 +15,64 @@ function computerPlay(){
         return 'scissors';
     }
 }
+
+// computer selection and player selection
 let computerSelection = computerPlay();
+let playerSelection = window.prompt('rock, paper or scissors?');
 
 // the 2 selections are then compared, and a winner is declared.
-function outcome(){
+function playRound(playerSelection,computerSelection){
     // console.log(computerSelection); <-for testing
-    let playerSelection = window.prompt('rock, paper, or scissors?');
     let input = playerSelection.toLowerCase();
 
     console.log(`You have chosen ${input}.`);
     console.log(`The computer has chosen ${computerSelection}.`)
 
     if(input===computerSelection){
-        return console.log('It\'s a tie.');
+        console.log('It\'s a tie.');
+        return ;
     }
     else if(input==='rock' && computerSelection==='paper'){
-        return console.log('Computer wins.');
+        console.log('Computer wins.');
+        return ;
     }
     else if(input==='rock' && computerSelection==='scissors'){
-        return console.log('User wins.');
+        console.log('User wins.');
+        return ;
     }
     else if(input==='paper' && computerSelection==='rock'){
-        return console.log('User wins.');
+        console.log('User wins.');
+        return ;
     }
     else if(input==='paper' && computerSelection==='scissors'){
-        return console.log('Computer wins.');
+        console.log('Computer wins.');
+        return ;
     }
     else if(input==='scissors' && computerSelection==='rock'){
-        return console.log('Computer wins.');
+        console.log('Computer wins.');
+        return ;
+    }
+    else if(input==='scissors' && computerSelection==='paper'){
+        console.log('User wins.');
+        return ;
     }
     else{
-        return console.log('User wins.');
+        console.log('Invalid input.');
+        return ;
     }
 }
-outcome();
+// playRound(playerSelection,computerSelection);
+
+// we now create a new function that plays 5 rounds and keeps score.
+function game(){
+    // let playerScore = 0;
+    // let computerScore = 0;
+    playRound(playerSelection,computerSelection);
+    playRound(playerSelection,computerSelection);
+    playRound(playerSelection,computerSelection);
+    playRound(playerSelection,computerSelection);
+    playRound(playerSelection,computerSelection);
+
+}
+game();
 // play 5 games then stop
