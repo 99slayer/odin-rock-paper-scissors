@@ -53,56 +53,58 @@ function playRound(){
 
     if(input===computerSelection){
         console.log('It\'s a tie.');
-        return 0;
+        return;
     }
     else if(input==='rock' && computerSelection==='paper'){
         console.log('Computer wins.');
-        return -1;
+        return computerScore + 1;
     }
     else if(input==='rock' && computerSelection==='scissors'){
         console.log('User wins.');
-        return 1;
+        return playerScore + 1;
     }
     else if(input==='paper' && computerSelection==='rock'){
         console.log('User wins.');
-        return 1;
+        return playerScore + 1;
     }
     else if(input==='paper' && computerSelection==='scissors'){
         console.log('Computer wins.');
-        return -1;
+        return computerScore + 1;
     }
     else if(input==='scissors' && computerSelection==='rock'){
         console.log('Computer wins.');
-        return -1;
+        return computerScore + 1;
     }
     else if(input==='scissors' && computerSelection==='paper'){
         console.log('User wins.');
-        return 1;
+        return playerScore + 1;
     }
     else{
         console.log('Invalid input.');
         return 0;
     }
 }
-let score = 0;
+// let score = 0;
 // we now create a new function that plays 5 rounds and keeps score.
 // *** NEED TO CREATE SEPERATE SCORES FOR USER AND COMPUTER ***
+let computerScore = 0;
+let playerScore = 0;
+// based on the outcome of playRound I need to add +1 to either the computers or the players score
+
 function game(){
-    playRound() + score;
-    playRound() + score;
-    playRound() + score;
-    playRound() + score;
-    playRound() + score;
-    console.log(score);
-    if(score<3){
-        return console.log('Computer has won the best of 5')
-    }
-    else if(score>=3){
-        return console.log('You have won the best of 5!')
+    playRound();
+    playRound();
+    playRound();
+    playRound();
+    playRound();
+    console.log(playerScore);
+    console.log(computerScore);
+    if(playerScore>computerScore){
+        return console.log('You have won the best of 5!');
     }
     else{
-        return console.log('Outcome unknown.')
-    }
+        return console.log('The computer has won the best of 5.');
+    };
 }
 game();
 // play 5 games then stop
