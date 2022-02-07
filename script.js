@@ -1,8 +1,10 @@
 // rock paper scissors
+// im not sure why the project page wanted the 2 selections to be parameters, it seems better to just have them inside the function?
 
-// computer makes a selection at random
 // math floor rounds a number down to the nearest whole integer
 // math random returns a float from 0 to 0.99 *
+
+// computer makes a selection at random
 function computerPlay(){
     let selection = Math.floor(Math.random()*3);
     if(selection==0){
@@ -18,31 +20,7 @@ function computerPlay(){
         return 'scissors';
     }
 }
-
-// create a player selection function that limits out input to one of the 3 desired choices.
-// sadly it seems we may not beable to limit input with window.prompt
-// function playerSelection(){
-//     let rawInput = window.prompt('rock, paper, or scissors?');
-//     let userInput = rawInput.toLowerCase();
-//     if(userInput==='rock'){
-//         console.log('You have chosen rock.');
-//         return 'rock';
-//     }
-//     else if(userInput==='paper'){
-//         console.log('You have chosen paper.');
-//         return 'paper';
-//     }
-//     else if(userInput==='scissors'){
-//         console.log('You have chosen scissors.');
-//         return 'scissors';
-//     }
-//     else{
-//         console.log('Invalid input, try again.');
-//         playerSelection();
-//     }
-// }
-// the 2 selections are then compared, and a winner is declared.
-// im not sure why the project page wanted the 2 selections to be parameters, it seems better to just have them inside the function?
+// this function compares the output from computerPlay and the players input to return a true or false value.
 function playRound(){
     let playerSelection = window.prompt('rock, paper, or scissors?');
     let input = playerSelection.toLowerCase();
@@ -84,42 +62,35 @@ function playRound(){
         return null;
     }
 }
-// let score = 0;
-// we now create a new function that plays 5 rounds and keeps score.
-// *** NEED TO CREATE SEPERATE SCORES FOR USER AND COMPUTER ***
-
-// based on the outcome of playRound I need to add +1 to either the computers or the players score
-
-// Im going to try and make a seperate function to help keep track of the 2 seperate scores
-
+// Score variables
 let computerScore = 0;
 let playerScore = 0;
 
+// this function takes the output of playRound, and depending on the winner of that round adds 1 to their score. (Does nothing if it was a tie.)
 function roundOutcome(){
     let outcome = playRound();
     if(outcome==false){
-        return computerScore = ++computerScore;
+        return ++computerScore;
     }
     else if(outcome==true){
-        return playerScore = ++playerScore;
+        return ++playerScore;
     }
     else{
         return null;
     }
 }
-
 // this function plays 5 rounds, declares a winner and then stops
 function game(){
     roundOutcome();
-    console.log(`comp score = ${computerScore}. player score = ${playerScore}.`)
+    console.log(`Computer score = ${computerScore}.\nPlayer score = ${playerScore}.`)
     roundOutcome();
-    console.log(`comp score = ${computerScore}. player score = ${playerScore}.`)
+    console.log(`Computer score = ${computerScore}.\nPlayer score = ${playerScore}.`)
     roundOutcome();
-    console.log(`comp score = ${computerScore}. player score = ${playerScore}.`)
+    console.log(`Computer score = ${computerScore}.\nPlayer score = ${playerScore}.`)
     roundOutcome();
-    console.log(`comp score = ${computerScore}. player score = ${playerScore}.`)
+    console.log(`Computer score = ${computerScore}.\nPlayer score = ${playerScore}.`)
     roundOutcome();
-    console.log(`comp score = ${computerScore}. player score = ${playerScore}.`)
+    console.log(`Computer score = ${computerScore}.\nPlayer score = ${playerScore}.`)
 
     if(playerScore>computerScore){
         return console.log('You have won the best of 5!');
@@ -134,5 +105,5 @@ function game(){
         return console.log('Outcome unknown.');
     }
 }
-
+// execute the game function
 game();
