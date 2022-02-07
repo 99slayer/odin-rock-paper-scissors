@@ -53,58 +53,86 @@ function playRound(){
 
     if(input===computerSelection){
         console.log('It\'s a tie.');
-        return;
+        return null;
     }
     else if(input==='rock' && computerSelection==='paper'){
         console.log('Computer wins.');
-        return computerScore + 1;
+        return false;
     }
     else if(input==='rock' && computerSelection==='scissors'){
         console.log('User wins.');
-        return playerScore + 1;
+        return true;
     }
     else if(input==='paper' && computerSelection==='rock'){
         console.log('User wins.');
-        return playerScore + 1;
+        return true;
     }
     else if(input==='paper' && computerSelection==='scissors'){
         console.log('Computer wins.');
-        return computerScore + 1;
+        return false;
     }
     else if(input==='scissors' && computerSelection==='rock'){
         console.log('Computer wins.');
-        return computerScore + 1;
+        return false;
     }
     else if(input==='scissors' && computerSelection==='paper'){
         console.log('User wins.');
-        return playerScore + 1;
+        return true;
     }
     else{
         console.log('Invalid input.');
-        return 0;
+        return null;
     }
 }
 // let score = 0;
 // we now create a new function that plays 5 rounds and keeps score.
 // *** NEED TO CREATE SEPERATE SCORES FOR USER AND COMPUTER ***
-let computerScore = 0;
-let playerScore = 0;
+
 // based on the outcome of playRound I need to add +1 to either the computers or the players score
 
+// Im going to try and make a seperate function to help keep track of the 2 seperate scores
+
+let computerScore = 0;
+let playerScore = 0;
+
+function roundOutcome(){
+    let outcome = playRound();
+    if(outcome==false){
+        return computerScore = ++computerScore;
+    }
+    else if(outcome==true){
+        return playerScore = ++playerScore;
+    }
+    else{
+        return null;
+    }
+}
+
+// this function plays 5 rounds, declares a winner and then stops
 function game(){
-    playRound();
-    playRound();
-    playRound();
-    playRound();
-    playRound();
-    console.log(playerScore);
-    console.log(computerScore);
+    roundOutcome();
+    console.log(`comp score = ${computerScore}. player score = ${playerScore}.`)
+    roundOutcome();
+    console.log(`comp score = ${computerScore}. player score = ${playerScore}.`)
+    roundOutcome();
+    console.log(`comp score = ${computerScore}. player score = ${playerScore}.`)
+    roundOutcome();
+    console.log(`comp score = ${computerScore}. player score = ${playerScore}.`)
+    roundOutcome();
+    console.log(`comp score = ${computerScore}. player score = ${playerScore}.`)
+
     if(playerScore>computerScore){
         return console.log('You have won the best of 5!');
     }
-    else{
+    else if(playerScore<computerScore){
         return console.log('The computer has won the best of 5.');
-    };
+    }
+    else if(playerScore===computerScore){
+        return console.log('The best of 5 has ended in a tie.');
+    }
+    else{
+        return console.log('Outcome unknown.');
+    }
 }
+
 game();
-// play 5 games then stop
