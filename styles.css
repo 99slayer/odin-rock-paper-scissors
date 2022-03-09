@@ -1,0 +1,47 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    color: white;
+}
+body{
+    background-color: rgb(75, 75, 75);
+}
+.main{
+    margin-top: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.buttons{
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-evenly;
+    width: 400px;
+    height: 80px;
+    border: 5px solid #f3841d;
+    border-radius: 100px;
+}
+.button{
+    padding: 5px 10px;
+    border: 3px solid #f3841d;
+    border-radius: 30px;
+    color: white;
+    background-color: rgb(109, 109, 109);
+}
+.results{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+.scores{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-evenly;
+}
+.scorebox{
+    padding: 5px 15px;
+    display: flex;
+    border: 3px solid #f3841d;
+    border-radius: 10px;
+}

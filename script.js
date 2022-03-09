@@ -1,10 +1,6 @@
-// rock paper scissors
-// im not sure why the project page wanted the 2 selections to be parameters, it seems better to just have them inside the function?
+let computerScore = 0;
+let playerScore = 0;
 
-// math floor rounds a number down to the nearest whole integer
-// math random returns a float from 0 to 0.99 *
-
-// computer makes a selection at random
 function computerPlay(){
     let selection = Math.floor(Math.random()*3);
     if(selection==0){
@@ -20,90 +16,87 @@ function computerPlay(){
         return 'scissors';
     }
 }
-// this function compares the output from computerPlay and the players input to return a true or false value.
-function playRound(){
-    let playerSelection = window.prompt('rock, paper, or scissors?');
-    let input = playerSelection.toLowerCase();
 
+let resultText = document.querySelector('.result');
+let playerChoice = document.querySelector('.playerChoice');
+let compChoice = document.querySelector('.compChoice');
+
+let playerScoreText = document.querySelector('.playerScore') ;
+let compScoreText = document.querySelector('.compScore');
+
+playerScoreText.textContent = `${playerScore}`;
+compScoreText.textContent = `${computerScore}`;
+
+// nodelist
+const btn = document.querySelectorAll('button');
+
+btn.forEach( (node) => {
+    node.addEventListener('click', (e) => {
+        if(e.target.className == 'rock button'){
+            playRound('rock');
+        }
+        else if(e.target.className == 'paper button'){
+            playRound('paper');
+        }
+        else{
+            playRound('scissors');
+        }
+        if(computerScore == 5){
+            computerScore = 0;
+            playerScore = 0;
+            playerChoice.textContent = 'The computer has won best of five.';
+            compChoice.textContent = '';
+        }
+        if(playerScore == 5){
+            computerScore = 0;
+            playerScore = 0;
+            playerChoice.textContent = 'You won best of five!';
+            compChoice.textContent = '';
+        }
+        playerScoreText.textContent = `${playerScore}`;
+        compScoreText.textContent = `${computerScore}`;
+    })
+})
+
+function playRound(playerSelection){
+    let input = playerSelection;
+    console.log(`compscore ${computerScore} playerscore ${playerScore}`);
     console.log(`You have chosen ${input}.`);
 
     let computerSelection = computerPlay();
 
+    playerChoice.textContent = `You have chosen ${playerSelection}.`;
+    compChoice.textContent = `The computer has chosen ${computerSelection}.`;
+
     if(input===computerSelection){
-        console.log('It\'s a tie.');
-        return null;
+        resultText.textContent = 'It\'s a tie.';
+        return;
     }
     else if(input==='rock' && computerSelection==='paper'){
-        console.log('Computer wins.');
-        return false;
-    }
-    else if(input==='rock' && computerSelection==='scissors'){
-        console.log('User wins.');
-        return true;
-    }
-    else if(input==='paper' && computerSelection==='rock'){
-        console.log('User wins.');
-        return true;
-    }
-    else if(input==='paper' && computerSelection==='scissors'){
-        console.log('Computer wins.');
-        return false;
-    }
-    else if(input==='scissors' && computerSelection==='rock'){
-        console.log('Computer wins.');
-        return false;
-    }
-    else if(input==='scissors' && computerSelection==='paper'){
-        console.log('User wins.');
-        return true;
-    }
-    else{
-        console.log('Invalid input.');
-        return null;
-    }
-}
-// Score variables
-let computerScore = 0;
-let playerScore = 0;
-
-// this function takes the output of playRound, and depending on the winner of that round adds 1 to their score. (Does nothing if it was a tie.)
-function roundOutcome(){
-    let outcome = playRound();
-    if(outcome==false){
+        resultText.textContent = 'Computer wins.';
         return ++computerScore;
     }
-    else if(outcome==true){
+    else if(input==='rock' && computerSelection==='scissors'){
+        resultText.textContent = 'User wins.';
+        return ++playerScore;
+    }
+    else if(input==='paper' && computerSelection==='rock'){
+        resultText.textContent = 'User wins.';
+        return ++playerScore;
+    }
+    else if(input==='paper' && computerSelection==='scissors'){
+        resultText.textContent = 'Computer wins.';
+        return ++computerScore;
+    }
+    else if(input==='scissors' && computerSelection==='rock'){
+        resultText.textContent = 'Computer wins.';
+        return ++computerScore;
+    }
+    else if(input==='scissors' && computerSelection==='paper'){
+        resultText.textContent = 'User wins.';
         return ++playerScore;
     }
     else{
-        return null;
+        return;
     }
 }
-// this function plays 5 rounds, declares a winner and then stops
-function game(){
-    roundOutcome();
-    console.log(`Computer score = ${computerScore}.\nPlayer score = ${playerScore}.`)
-    roundOutcome();
-    console.log(`Computer score = ${computerScore}.\nPlayer score = ${playerScore}.`)
-    roundOutcome();
-    console.log(`Computer score = ${computerScore}.\nPlayer score = ${playerScore}.`)
-    roundOutcome();
-    console.log(`Computer score = ${computerScore}.\nPlayer score = ${playerScore}.`)
-    roundOutcome();
-    console.log(`Computer score = ${computerScore}.\nPlayer score = ${playerScore}.`)
-
-    if(playerScore>computerScore){
-        return console.log('You have won the best of 5!');
-    }
-    else if(playerScore<computerScore){
-        return console.log('The computer has won the best of 5.');
-    }
-    else if(playerScore===computerScore){
-        return console.log('The best of 5 has ended in a tie.');
-    }
-    else{
-        return console.log('Outcome unknown.');
-    }
-}
-// execute the game function
-game();
